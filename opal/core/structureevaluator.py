@@ -2,14 +2,14 @@ import sys
 import os.path
 import marshal
 import pickle
-import new
-import log
+import types
+from . import log
 
-from mafrw import Agent
-from mafrw import Message
+from .mafrw import Agent
+from .mafrw import Message
 
-from set import Set
-from data import DataTable
+from .set import Set
+from .data import DataTable
 
 
 class DataCacheEntry(DataTable):
@@ -36,7 +36,7 @@ class DataCacheEntry(DataTable):
         valDict = self.get_column(measure)
         valVect = []
         for prob in self.get_row_keys():
-            if prob in valDict.keys():
+            if prob in list(valDict.keys()):
                 valVect.append(valDict[prob])
         return valVect
 

@@ -32,7 +32,7 @@ class MPIPlatform(Platform):
         # str(ltime.tm_year) +  str(ltime.tm_mon) + str(ltime.tm_mday) + \
             # str(ltime.tm_hour) + str(ltime.tm_min) + str(ltime.tm_sec)
         optionStr = " "
-        for param in self.configuration.keys():
+        for param in list(self.configuration.keys()):
             optionStr = optionStr + param + " " + self.configuration[param] + " "
         #child = self.communicator.Spawn('python',
         #                        [self.wrapper_name, command])

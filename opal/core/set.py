@@ -46,14 +46,14 @@ class Set:
         # immediately
         if len(self.indices) <= 0:
             return False
-        idType = type(self.indices.keys()[0])
+        idType = type(list(self.indices.keys())[0])
         # Identity is provided to the verifcation
         if type(elem) == idType:
-            return (elem in self.indices.keys())
+            return (elem in list(self.indices.keys()))
         # Element is provided
         else:
             try:
-                return (elem.identify() in self.indices.keys())
+                return (elem.identify() in list(self.indices.keys()))
             except:
                 return False
 
@@ -76,7 +76,7 @@ class Set:
         '''
         if len(self.inidces) <= 0:
             return
-        idType = type(self.indices.keys()[0])
+        idType = type(list(self.indices.keys())[0])
         if type(elem) == idType:
             try:
                 index = self.indices[elem]

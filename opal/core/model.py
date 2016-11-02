@@ -2,9 +2,9 @@ import os
 import sys
 import os.path
 import pickle
-import log
+from . import log
 
-from platform import Platform
+from .platform import Platform
 from ..Platforms import LINUX
 
 #from opal.core.modelstructure import ModelEvaluator
@@ -60,7 +60,7 @@ class Model:
         # By default, LINUX is used 
         self.platform_description = {'name':'LINUX',
                                      'settings':{}}
-        if 'platform' in self.evaluating_options.keys():
+        if 'platform' in list(self.evaluating_options.keys()):
             platform = self.evaluating_options['platform']
             if type(platform) == type('a platform name'):
                 self.platform_description['name'] = platform

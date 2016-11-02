@@ -2,7 +2,7 @@ import os
 import sys
 import os.path
 import pickle
-import log
+from . import log
 
 #from opal.core.modelstructure import ModelEvaluator
 

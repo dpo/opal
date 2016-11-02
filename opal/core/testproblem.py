@@ -1,6 +1,6 @@
 __docformat__ = 'restructuredText'
 
-from set import Set
+from .set import Set
 
 class TestProblem:
     """
@@ -84,7 +84,7 @@ class ProblemSet(Set):
         if isinstance(problem, TestProblem):
             self.append(problem)
         else:
-            raise TypeError, 'Problem must be a TestProblem'
+            raise TypeError('Problem must be a TestProblem')
 
     def remove_problem(self, problem):
         self.remove(problem)
@@ -154,7 +154,7 @@ class ProblemCollection(ProblemSet):
                     pass # Try to get from other collections
             # If all collections are searched wihtout result
             # an exception of index error is raised
-            raise IndexError, 'Element can not be found in the set'
+            raise IndexError('Element can not be found in the set')
 
     def __contains__(self,prob):
         if ProblemSet.__contains__(self, prob):
@@ -182,7 +182,7 @@ class ProblemCollection(ProblemSet):
         if isinstance(collection, ProblemCollection):
             self.subcollections.append(collection)
         else:
-            raise TypeError, 'Collection must be a ProblemCollection object'
+            raise TypeError('Collection must be a ProblemCollection object')
 
         
 def _test():

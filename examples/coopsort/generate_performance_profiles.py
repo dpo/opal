@@ -43,14 +43,14 @@ numberOfRepeat = benchmarkSpec['testing']['repeats']
 
 cpuTime = {}
 profiles = {}
-for name, coopTree in coopTrees.iteritems():
+for name, coopTree in coopTrees.items():
     profiles[name] = []
 
 for i in range(numberOfList):
     l = create_test_list(listSpec, listLength, 0)
     minTime = float('inf')
     cpuTime = {}
-    for name, coopTree in coopTrees.iteritems():
+    for name, coopTree in coopTrees.items():
         meanTime = 0.0
         for r in range(numberOfRepeat):
             l1 = list(l)
@@ -69,12 +69,12 @@ for i in range(numberOfList):
         if (meanTime < minTime):
             minTime = meanTime
 
-    for name, t in cpuTime.iteritems():
+    for name, t in cpuTime.items():
         profiles[name].append(t / minTime)
 
 percentage = [float(i + 1) / numberOfList for i in range(numberOfList)]
 
-for name, x in profiles.iteritems():
+for name, x in profiles.items():
     profiles[name] = (sorted(x), percentage)
 
-print profiles
+print(profiles)

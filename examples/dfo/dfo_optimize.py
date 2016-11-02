@@ -18,8 +18,8 @@ params = [par for par in DFO.parameters if par.is_real]
 # Select tiny unconstrained HS problems.
 problems = [prb for prb in CUTEr.HS if prb.nvar <= 5 and prb.ncon == 0]
 
-print 'Working with parameters ', [par.name for par in params]
-print 'Testing on problems ', [prb.name for prb in problems]
+print('Working with parameters ', [par.name for par in params])
+print('Testing on problems ', [prb.name for prb in problems])
 
 data = ModelData(DFO, problems, params)
 structure = ModelStructure(objective=avg_time, constraints=[])  # Unconstrained

@@ -133,13 +133,13 @@ class LSFPlatform(Platform):
         Handle a call for proposal of executing a command through LSF platform
         '''
 
-        if 'proposition' not in info.keys():
+        if 'proposition' not in list(info.keys()):
             self.logger.log('Proposal of executing a command has not ' + \
                             'information to process')
             return
         execCmd = info['proposition']['command']
         tag = info['proposition']['tag']
-        if 'queue' in info['proposition'].keys():
+        if 'queue' in list(info['proposition'].keys()):
             queueTag = info['proposition']['queue']
         else:
             queueTag = None
@@ -147,7 +147,7 @@ class LSFPlatform(Platform):
         # str(ltime.tm_year) +  str(ltime.tm_mon) + str(ltime.tm_mday) + \
             # str(ltime.tm_hour) + str(ltime.tm_min) + str(ltime.tm_sec)
         optionStr = " "
-        for param in self.configuration.keys():
+        for param in list(self.configuration.keys()):
             optionStr = optionStr + param + " " + \
                         self.configuration[param] + " "
         if queueTag is not None:

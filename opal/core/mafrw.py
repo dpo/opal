@@ -22,7 +22,7 @@ interaction between the agents.
 
 import hashlib
 import threading
-import log
+from . import log
 import re
 
 class Message:
@@ -191,7 +191,7 @@ class Agent(threading.Thread):
                             ' could not be parsed')
             return
 
-        if cmd in self.message_handlers.keys():
+        if cmd in list(self.message_handlers.keys()):
             self.logger.log('The message with id = ' + str(message.id) + \
                             ' interpreted as command: ' + cmd + \
                             ' with info: ' + str(info))
@@ -230,7 +230,7 @@ class Agent(threading.Thread):
         info = None
         # If there is a content parser corresponding to the message
         # performative, apply it
-        if message.language in self.content_parsers.keys():
+        if message.language in list(self.content_parsers.keys()):
             info = (self.content_parsers[message.performative](message.content))
             # The obtained command is distingushed by peformative and 
             # information extracted from the content of message
@@ -243,10 +243,10 @@ class Agent(threading.Thread):
             except:
                 info = None
         if info is not None:
-            if 'action' in info.keys():
+            if 'action' in list(info.keys()):
                 cmd = cmd + '-' + info['action']
-            elif ('proposition' in info.keys()) and \
-                 ('what' in info['proposition'].keys()):
+            elif ('proposition' in list(info.keys())) and \
+                 ('what' in list(info['proposition'].keys())):
                 cmd = cmd + '-' + info['proposition']['what']     
         return cmd, info
     
@@ -348,7 +348,7 @@ class ManagementService:
             query = Query(kwargs)
         query.update(**kwargs)
         result = []
-        for obj in self.managed_objects.values():
+        for obj in list(self.managed_objects.values()):
             if query.match(obj):
                 result.append(obj)
         return result
@@ -379,7 +379,7 @@ class MessageQuery(Query):
         if len(self.patterns) == 0:  # An emtry query is understood we
                                      # will select all message
             return True
-        if 'receiver' in self.patterns.keys() and  \
+        if 'receiver' in list(self.patterns.keys()) and  \
                 re.match(self.patterns['receiver'], str(msg.receiver)):     
             return True
         return False
@@ -416,11 +416,11 @@ class MessageService(ManagementService):
         # If it is not a broadcast message, deliver to corresponding message
         # box
         if msg.receiver is not None:
-            if receiver in self.message_boxes.keys():
+            if receiver in list(self.message_boxes.keys()):
                 self.message_boxes[receiver].append(msg)
         else: # If it is a broadcast, deliver copies to all message boxes but
             # sender
-            for receiver in self.message_boxes.keys():
+            for receiver in list(self.message_boxes.keys()):
                 if not (receiver == msg.sender):
                     self.message_boxes[receiver].append(msg)
         
@@ -459,11 +459,11 @@ class DirectoryService(ManagementService):
         return
 
     def create_id(self, agent):
-        agentId = hashlib.sha1(agent.name).hexdigest()
+        agentId = hashlib.sha1(agent.name.encode("UTF-8")).hexdigest()
         return agentId
 
     def get_all(self):
-        return self.managed_objects.values()
+        return list(self.managed_objects.values())
 
 class Environment(threading.Thread):
     """
@@ -487,7 +487,7 @@ class Environment(threading.Thread):
 
     def __init__(self, name='environment', logHandlers=[]):
         threading.Thread.__init__(self)
-        self.id = hashlib.sha1(name).hexdigest()
+        self.id = hashlib.sha1(name.encode("UTF-8")).hexdigest()
         self.name = name
         self.message_service = MessageService()
         self.directory_service = DirectoryService() 

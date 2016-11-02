@@ -3,9 +3,9 @@ import copy
 import os
 import tempfile
 
-from data import DataSet
-from parameter import Parameter, ParameterConstraint
-from measure import Measure
+from .data import DataSet
+from .parameter import Parameter, ParameterConstraint
+from .measure import Measure
 
 
 __docformat__ = 'restructuredtext'
@@ -78,7 +78,7 @@ class Algorithm:
         if isinstance(param, Parameter):
             self.parameters.append(param)
         else:
-            raise TypeError, 'param must be a Parameter'
+            raise TypeError('param must be a Parameter')
         return
     
     def add_measure(self, measure):
@@ -86,7 +86,7 @@ class Algorithm:
         if isinstance(measure, Measure):
             self.measures.append(measure)
         else:
-            raise TypeError, 'measure must be a Measure object'
+            raise TypeError('measure must be a Measure object')
         return
 
    
@@ -231,7 +231,7 @@ class Algorithm:
             self.constraints.append(ParameterConstraint(paramConstraint))
         else:
             msg = 'paramConstraint must be a String or ParameterConstraint'
-            raise TypeError, msg
+            raise TypeError(msg)
         return
 
     def are_parameters_valid(self):

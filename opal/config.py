@@ -1,6 +1,6 @@
 import os
-import ConfigParser as cfg # In python 3, this module is changed to configparser
-from Platforms import LINUX as platform
+import configparser as cfg # In python 3, this module is changed to configparser
+from .Platforms import LINUX as platform
 
 def create_default_configuration():
     configuration = cfg.ConfigParser()

@@ -217,26 +217,26 @@ def create_test_list(listSpec, n, radix=2):
     else:
         N = n
     if listType == 0:
-        l = [int(N * random.random()) for i in xrange(N)]
+        l = [int(N * random.random()) for i in range(N)]
     elif listType == 1:
-        l = [i for i in xrange(N)]
+        l = [i for i in range(N)]
     elif listType == 2:
         N1 = int(0.95 * N)
-        l = [i for i in xrange(N)]
-        l.extend([int(N * random.random()) for i in xrange(N - N1)])
+        l = [i for i in range(N)]
+        l.extend([int(N * random.random()) for i in range(N - N1)])
     elif listType == 3:
-        l = [int(10 ** 15 * random.random()) for i in xrange(N)]
+        l = [int(10 ** 15 * random.random()) for i in range(N)]
     elif listType == 4:
         l = [0, 1]
         for i in range(n - 1):
             l = [j * 2 for j in l]
             l.extend([j + 1 for j in l])
     elif listType == 5:  # gauss distribution mu = 0.5, sigma = 1
-        l = [int(N / 2 + N * random.gauss(0, 0.01) / 2) for i in xrange(N)]
+        l = [int(N / 2 + N * random.gauss(0, 0.01) / 2) for i in range(N)]
     elif listType == 6:  # log-normal distribution
-        l = [int(N * random.lognormvariate(0, 10)) for i in xrange(N)]
+        l = [int(N * random.lognormvariate(0, 10)) for i in range(N)]
     elif listType == 7:  # exponential distribution
-        l = [int(N * random.expovariate(140)) for i in xrange(N)]
+        l = [int(N * random.expovariate(140)) for i in range(N)]
     elif listType == 8:  # gauss distribution mu = 0.5, sigma = 1
         mu = 0
         if len(listSpec) > 1:
@@ -244,7 +244,7 @@ def create_test_list(listSpec, n, radix=2):
         else:
             stdVariance = 0.0125
         l = [int(N / 2 + N * random.gauss(mu, stdVariance) / 2)
-             for i in xrange(N)]
+             for i in range(N)]
         minValue = min(l)
         l = [elem - minValue for elem in l]
     elif listType == 9:  # gauss distribution mu = 0.5, sigma = 1
@@ -253,7 +253,7 @@ def create_test_list(listSpec, n, radix=2):
             stdVariance = listSpec[1]
         else:
             stdVariance = 1
-        l = [random.gauss(mu, stdVariance) for i in xrange(N)]
+        l = [random.gauss(mu, stdVariance) for i in range(N)]
     return l
 
 

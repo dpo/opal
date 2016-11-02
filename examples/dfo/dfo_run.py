@@ -35,7 +35,7 @@ def solve(problem_name):
 
     ctime = 0.0
     f = open('cuter.log', 'r')
-    for line in f.xreadlines():
+    for line in f:
         line = line.strip('\n')
         if len(line) <= 0:
             continue

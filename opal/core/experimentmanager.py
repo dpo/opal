@@ -3,16 +3,16 @@ import string
 import types
 import time
 import shutil
-import log
+from . import log
 import copy
 import threading
 import hashlib
 #import logging
 
 #import utility
-from testproblem import TestProblem
-from data import Data
-from mafrw import *
+from .testproblem import TestProblem
+from .data import Data
+from .mafrw import *
 
 from ..Platforms import supported_platforms
 
@@ -132,7 +132,7 @@ class ExperimentManager(Agent):
         
         parameterValues = info['proposition']['parameter']
         self.update_parameter(parameterValues)
-        if 'tag' in info['proposition'].keys():
+        if 'tag' in list(info['proposition'].keys()):
             parameterTag = info['proposition']['tag']
         else:
             parameterTag = self.create_tag()
@@ -180,7 +180,7 @@ class ExperimentManager(Agent):
         The content message contains information of identifying the
         terminated session 
         '''
-        if 'proposition' not in info.keys():
+        if 'proposition' not in list(info.keys()):
             return
         proposition =  info['proposition']
         sessionTag = proposition['who']

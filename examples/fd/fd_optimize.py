@@ -31,4 +31,4 @@ except:
     eps *= 2
 
 from math import sqrt
-print 'Expected optimal value is approximately %21.15e' % sqrt(eps)
+print('Expected optimal value is approximately %21.15e' % sqrt(eps))

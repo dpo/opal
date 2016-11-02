@@ -15,4 +15,4 @@ if __name__ == '__main__':
         #print midPart
         treeCode10 = int(re.sub(regExp, r'\2', line).strip())
         treeCode6 = coopsort.encode(treeCode10, 6)
-        print beginPart, treeCode6, endPart
+        print(beginPart, treeCode6, endPart)

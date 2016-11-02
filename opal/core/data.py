@@ -7,8 +7,8 @@ same storage and in/out method.
 """
 import re
 import itertools
-import log
-from set import Set
+from . import log
+from .set import Set
 
 class Data:
     """
@@ -123,16 +123,16 @@ class DataSet(Set):
         
         if (len(valueList) <= 0) and (len(valueDict) <= 0):
             # Set value to the default
-            for elem in self.db.values():
+            for elem in list(self.db.values()):
                 elem.set_value(None)
         else:    
             # Set the values in the list first
-            for elem, value in itertools.izip(self.db, valueList):
+            for elem, value in zip(self.db, valueList):
                 elem.set(value)
             # The values in the dictionary is added of
             # correct the ones are set by the list
-            for elemId in valueDict.keys():
-                if elemId in self.indices.keys():
+            for elemId in list(valueDict.keys()):
+                if elemId in list(self.indices.keys()):
                     self.db[self.indices[elemId]].set(valueDict[elemId])
         return
 
@@ -175,7 +175,7 @@ class DataTable:
 
     def __len__(self):
         length = 0
-        for row in self.table.keys():
+        for row in list(self.table.keys()):
             #log.debugger.log(str(self.table[row]))
             length = length + len(self.table[row])
         return length
@@ -229,7 +229,7 @@ class DataTable:
         if rowId not in self.row_identities:
             raise Exception('Row identity is not valid')
 
-        if rowId not in self.table.keys():
+        if rowId not in list(self.table.keys()):
             '''
 
             Return an empty dictionary
@@ -237,7 +237,7 @@ class DataTable:
             return valueDict
         
         for col in self.column_identities:
-            if col in self.table[rowId].keys():
+            if col in list(self.table[rowId].keys()):
                 valueDict[col] = self.table[rowId][col]
         return valueDict
 
@@ -256,18 +256,18 @@ class DataTable:
     
     def update_row(self, rowId, values=None, **kwargs):
         if rowId not in self.row_identities:
-            raise KeyError, 'Could identify a row of ID ' + str(rowId)
-        if rowId not in self.table.keys():
+            raise KeyError('Could identify a row of ID ' + str(rowId))
+        if rowId not in list(self.table.keys()):
             self.table[rowId] = {}
         valueDict = {}
         if type(values) is type(['list']):
-            for col, val in itertools.izip(self.column_identities, values):
+            for col, val in zip(self.column_identities, values):
                 valueDict[col] = val
         if type(values) is type({'key':'value'}):
             valueDict.update(values)
         valueDict.update(kwargs)
         #log.debugger.log('Values to update: ' + str(valueDict))
-        for col, val in valueDict.iteritems():
+        for col, val in valueDict.items():
             self.table[rowId][col] = val
         return
 
@@ -284,8 +284,8 @@ class DataTable:
             raise Exception('Column identity is not valid')
 
         for row in self.row_identities:
-            if (row in self.table.keys()) and \
-                   (colId in self.table[row].keys()):
+            if (row in list(self.table.keys())) and \
+                   (colId in list(self.table[row].keys())):
                 valueDict[row] = self.table[row][colId]
         return valueDict
     
@@ -299,20 +299,20 @@ class DataTable:
 
     def update_column(self, colId, values=None, **kwargs):
         if coldId not in self.column_identities:
-            raise KeyError, 'Could not identify a column of ID ' + str(colId)
+            raise KeyError('Could not identify a column of ID ' + str(colId))
 
         valueDict = {}
 
         if type(values) is type(['list']):
-            for row, val in itertools.izip(self.row_identities, values):
+            for row, val in zip(self.row_identities, values):
                 valueDict[row] = val
         if type(values) is type({'key':'value'}):
             valueDict.update(values)
             
         valueDict.update(kwargs)
 
-        for row, val in valueDict.iteritems():
-            if row not in self.table.keys():
+        for row, val in valueDict.items():
+            if row not in list(self.table.keys()):
                 self.table[row] = {}
             self.table[row][colId] = val
         return
