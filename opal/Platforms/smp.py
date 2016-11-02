@@ -68,7 +68,7 @@ class SMPPlatform(Platform):
 
         Handle a call for proposal of executing a command
         '''
-        if 'proposition' not in info.keys():
+        if 'proposition' not in list(info.keys()):
             self.logger.log('Proposal of executing a command has not ' + \
                             'information to prcess')
             return
@@ -76,7 +76,7 @@ class SMPPlatform(Platform):
         proposition = info['proposition']
         command = proposition['command']
         name = proposition['tag']
-        if 'queue' in proposition.keys():
+        if 'queue' in list(proposition.keys()):
             queueTag = proposition['queue']
         else:
             queueTag = None

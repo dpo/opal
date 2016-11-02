@@ -1,8 +1,8 @@
 import sys
 import os.path
 import marshal
-import new
-import log
+import types
+from . import log
 
 class SavableFunction:
     """
@@ -51,7 +51,7 @@ class SavableFunction:
         return content
 
     def __setstate__(self, content):
-        self.func = new.function(marshal.loads(content['code']),globals())
+        self.func = types.FunctionType(marshal.loads(content['code']),globals())
         self.information = content['information']
         self.name = content['name']
         return

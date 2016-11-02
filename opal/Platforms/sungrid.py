@@ -155,13 +155,13 @@ class SunGridPlatform(Platform):
         platform
         '''
 
-        if 'proposition' not in info.keys():
+        if 'proposition' not in list(info.keys()):
             self.logger.log('Proposal of executing a command has not ' + \
                             'information to process')
             return
         execCmd = info['proposition']['command']
         tag = info['proposition']['tag']
-        if 'queue' in info['proposition'].keys():
+        if 'queue' in list(info['proposition'].keys()):
             queueTag = info['proposition']['queue']
         else:
             queueTag = None

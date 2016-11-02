@@ -1,5 +1,5 @@
-from mafrw import Agent
-from mafrw import Message
+from .mafrw import Agent
+from .mafrw import Message
 
 class Task(Agent):
     def __init__(self,
@@ -74,7 +74,7 @@ class QueueSystem:
         if (queue is None) or (queue is 'default'):
             self.tasks['default'].append(task)
         else:
-            if queue in self.tasks.keys():
+            if queue in list(self.tasks.keys()):
                 self.tasks[queue].append(task)
             else:
                 self.tasks[queue] = [task]         
@@ -84,12 +84,12 @@ class QueueSystem:
         if (queue is None) or (queue is 'default'):
             if len(self.tasks['default']) > 0 :
                 return self.tasks['default'].pop()
-            for queue in self.tasks.keys():
+            for queue in list(self.tasks.keys()):
                 if queue is not 'default':
                     return self.tasks[queue].pop()
             raise Exception('The task queue is empty')
         
-        if queue in self.tasks.keys():
+        if queue in list(self.tasks.keys()):
             task = self.tasks[queue].pop()
             # Remove the queue if it is empty
             if len(self.tasks[queue]) == 0:
@@ -102,7 +102,7 @@ class QueueSystem:
         if (queue is None) or (queue is 'default'):
             del self.tasks['default'][0:]
             return
-        if queue in self.tasks.keys():
+        if queue in list(self.tasks.keys()):
             del self.tasks[queue]
             return
         return
@@ -177,7 +177,7 @@ class Platform(Agent):
     # Message handlers
 
     def cancel_queue(self, info):
-        if 'queue' in info['proposition'].keys():
+        if 'queue' in list(info['proposition'].keys()):
             queueTag = info['proposition']['queue']
         else:
             queueTag = None

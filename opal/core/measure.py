@@ -1,8 +1,8 @@
 import copy
 
-from data import Data
-from data import DataTable
-from tools import TableFormatter
+from .data import Data
+from .data import DataTable
+from .tools import TableFormatter
 
 
 class Measure(Data):

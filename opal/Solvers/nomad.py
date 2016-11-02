@@ -90,8 +90,8 @@ class NOMADCommunicator(Agent):
 
         # Extract every words from the file and save to a list
         f = open(inputFile)
-        map(lambda l: inputValues.extend(l.strip('\n').strip(' ').split(' ')),
-                                         f.readlines())
+        list(map(lambda l: inputValues.extend(l.strip('\n').strip(' ').split(' ')),
+                                         f.readlines()))
         f.close()
         self.logger.log('Input: ' + str(inputValues))
         return inputValues
@@ -340,7 +340,8 @@ class NOMADSolver(Solver):
         # Dump model to the file so that the executable blackbox can load it as
         # blackbox data
 
-        f = open(dataFile, 'w')
+        f = open(dataFile, 'wb')
+        print(type(model),type(f))
         pickle.dump(model, f)
         f.close()
         return
@@ -500,7 +501,7 @@ class NOMADMPISolver(NOMADSolver):
 
     def run(self):
         optionStr = ''
-        for opt in self.mpi_config.keys():
+        for opt in list(self.mpi_config.keys()):
             optionStr = ' -' + opt + ' ' + str(self.mpi_config[opt])
         os.system('mpirun' + optionStr + ' ' + \
                       'nomad.MPI ' + self.paramFileName)

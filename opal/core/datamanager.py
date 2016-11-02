@@ -3,13 +3,13 @@ import string
 import types
 import time
 import shutil
-import log
+from . import log
 import copy
 #import logging
 
 #import utility
-from testproblem import TestProblem
-from mafrw import Agent
+from .testproblem import TestProblem
+from .mafrw import Agent
 
 from .. import config
 

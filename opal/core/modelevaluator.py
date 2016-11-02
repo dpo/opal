@@ -2,7 +2,7 @@ import os
 import sys
 import os.path
 import pickle
-import log
+from . import log
 import hashlib
 
 from .mafrw import Agent
@@ -33,7 +33,7 @@ class ModelEvaluator(Agent):
                 # The model is loaded by pickling
                 # Be able to be serialized is a requirement for
                 # a model object
-                f = open(modelFile)
+                f = open(modelFile,'rb')
                 model = pickle.load(f)
                 f.close()
            
@@ -98,13 +98,13 @@ class ModelEvaluator(Agent):
         valuesStr = '_'
         for coordinate in point:
             valuesStr = valuesStr + str(coordinate) + '_'
-        return hashlib.sha1(valuesStr).hexdigest()
+        return hashlib.sha1(valuesStr.encode("UTF-8")).hexdigest()
   
     # Message handlers
 
     def activate_parameter_evaluation(self, info):
         parameterValues = info['proposition']['point']
-        if 'tag' in info['proposition'].keys():
+        if 'tag' in list(info['proposition'].keys()):
             parameterTag = info['proposition']['tag']
         else:
             parameterTag = self.create_tag(parameterValues)
@@ -155,7 +155,7 @@ class ModelEvaluator(Agent):
         Message handlers for STOP signal
         '''
         # the model is saved back to file
-        f = open(self.model_file, 'w')
+        f = open(self.model_file, 'wb')
         pickle.dump(self.model, f)
         f.close()
         Agent.stop(self, info)

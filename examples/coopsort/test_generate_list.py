@@ -22,4 +22,4 @@ for listSpec in listSpecs:
         #for n in [250, 500, 750, 1000, 1250, 1500, 1750, 2000]:
         listName = str(listSpec) + 'l' + str(n)
         generatedLists[listName] = create_test_list(listSpec, n, 0)
-print generatedLists
+print(generatedLists)

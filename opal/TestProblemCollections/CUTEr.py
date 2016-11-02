@@ -6,8 +6,8 @@ import sys
 
 from ..core.testproblem import *
 
-from cuterfactory import CUTErFactory
-from cuterfactory import CUTErQuery
+from .cuterfactory import CUTErFactory
+from .cuterfactory import CUTErQuery
 
 #data_file = os.path.join(os.path.dirname(os.path.abspath(sys.modules[__name__].__file__)),'CUTEr.data')
 data_file = os.path.join(os.path.expanduser('~'),'.opal/CUTEr-1.data')

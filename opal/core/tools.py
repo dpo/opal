@@ -15,7 +15,7 @@ def extract_measure(content, description, name, valueType = 'int'):
                           content)
     value = None
     for m in matches:
-        if name not in m.groupdict().keys():
+        if name not in list(m.groupdict().keys()):
             raise Exception('Could not to extract measure ' + name)
             continue
         value = converters[valueType](m.groupdict()[name])

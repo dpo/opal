@@ -29,11 +29,11 @@ coopTrees['coop sort 2'] = coopTreeFactory.createTree(name='test tree 2',
 coopTrees['coop sort 3'] = coopTreeFactory.createTreeFromEncodedNumber(name='test tree 3',
                                                                        encodedNumber=45203)
 
-for name, coopTree in coopTrees.iteritems():
-    l = [int(N * random.random()) for i in xrange(N)]
-    print "CoopSort with the tree:", coopTree._name
+for name, coopTree in coopTrees.items():
+    l = [int(N * random.random()) for i in range(N)]
+    print("CoopSort with the tree:", coopTree._name)
     t = time.clock()
     l = coopsort(l, coopTree.getRoot())
     t = time.clock() - t
     #print "after sorting", l
-    print 'Computing time: %6.2f second \n' %  (t)
+    print('Computing time: %6.2f second \n' %  (t))

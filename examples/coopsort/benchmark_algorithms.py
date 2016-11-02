@@ -48,12 +48,12 @@ numberOfRepeat = benchmarkSpec['testing']['repeats']
 for listSpec in listSpecs:
     listType = str(listSpec)
     cpuTime[listType] = {}
-    for name, coopTree in coopTrees.iteritems():
+    for name, coopTree in coopTrees.items():
         cpuTime[listType][name] = {}
     for k in range(numberOfList):
         n = listLengthUnit * (k + 1)
         l = create_test_list(listSpec, n, 0)
-        for name, coopTree in coopTrees.iteritems():
+        for name, coopTree in coopTrees.items():
             meanTime = 0.0
             for r in range(numberOfRepeat):
                 l1 = list(l)
@@ -72,4 +72,4 @@ for listSpec in listSpecs:
                 del l1[:]
                 del l1
             cpuTime[listType][name][n] = meanTime / numberOfRepeat
-print cpuTime
+print(cpuTime)

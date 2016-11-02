@@ -3,12 +3,12 @@ import string
 import types
 import time
 import shutil
-import log
+from . import log
 import copy
 #import logging
 
 #import utility
-from testproblem import TestProblem
+from .testproblem import TestProblem
 
 from .. import config
 

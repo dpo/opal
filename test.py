@@ -20,4 +20,4 @@ if __name__ == '__main__':
         from nose import main
         main()
     except NameError:
-        print 'The NOSE package is required'
+        print('The NOSE package is required')

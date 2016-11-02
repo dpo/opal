@@ -32,13 +32,13 @@ class Parameter(Data):
     def __init__(self, kind='real', default=None, bound=None, name=None,
                  description='', **kwargs):
         if kind not in ['real', 'integer', 'binary', 'categorical']:
-            raise TypeError, 'kind must be real, integer or categorical'
+            raise TypeError('kind must be real, integer or categorical')
 
         if kind == 'real' and type(default) != type(0.0):
-            raise ValueError, 'default value must agree with type'
+            raise ValueError('default value must agree with type')
 
         if kind == 'integer' and type(default) != type(0):
-            raise ValueError, 'default value must agree with type'
+            raise ValueError('default value must agree with type')
 
         self.kind = kind
 
@@ -51,9 +51,9 @@ class Parameter(Data):
         # The _default is a description
         if default is not None:
             if kind == 'real' and type(default) != type(0.0):
-                raise ValueError, 'default value must agree with type'
+                raise ValueError('default value must agree with type')
             if kind == 'integer' and type(default) != type(0):
-                raise ValueError, 'default value must agree with type'
+                raise ValueError('default value must agree with type')
             self._default = default
         else:
             if self.kind == 'real':

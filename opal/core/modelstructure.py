@@ -1,12 +1,12 @@
 import sys
 import os.path
 import marshal
-import new
+#import new
 import types 
-import log
+from . import log
 
 
-from savablefunction import SavableFunction
+from .savablefunction import SavableFunction
 
 class MeasureFunction(SavableFunction):
     """
@@ -199,7 +199,7 @@ class ModelStructure:
         # For information that is provided as an user-defined function,
         # it should be transformed to an SavableFunction object. This allows
         # to save the structure as a data file
-        for infoName, info in self.informations.items():
+        for infoName, info in list(self.informations.items()):
             if isinstance(info, (types.FunctionType, types.BuiltinFunctionType)):
                 self.informations[infoName] = SavableFunction(function=info,
                                                               name=infoName)
