@@ -20,7 +20,7 @@ def heapsort(iterable):
     h = []
     for value in iterable:
         heappush(h, value)
-    return [heappop(h) for i in xrange(len(h))]
+    return [heappop(h) for i in range(len(h))]
 
 
 # From
@@ -49,9 +49,9 @@ def mergesort(l):
 
 # From http://www.daniweb.com/software-development/python/code/216689
 def selectionsort(l):
-    for i in xrange(0, len(l)):
+    for i in range(0, len(l)):
         min = i
-        for j in xrange(i + 1, len(l)):
+        for j in range(i + 1, len(l)):
             if l[j] < l[min]:
                 min = j
         l[i], l[min] = l[min], l[i]  # swap
@@ -59,7 +59,7 @@ def selectionsort(l):
 
 
 def insertionsort(l):
-    for i in xrange(1, len(l)):
+    for i in range(1, len(l)):
         save = l[i]
         j = i
         while j > 0 and l[j - 1] > save:
@@ -232,17 +232,17 @@ def timsort(l):
 if __name__ == '__main__':
     l = [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
     timsort(l)
-    print l
-    print bubblesort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
-    print radixsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0], 2)
-    print quicksort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
-    print quicksort2([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
+    print(l)
+    print(bubblesort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0]))
+    print(radixsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0], 2))
+    print(quicksort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0]))
+    print(quicksort2([1, 3, 5, 7, 9, 2, 4, 6, 8, 0]))
     l = [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
     selectionsort(l)
-    print l
+    print(l)
     l = [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
     insertionsort(l)
-    print l
-    print mergesort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
-    print heapsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
-    print countsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0], 10)
+    print(l)
+    print(mergesort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0]))
+    print(heapsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0]))
+    print(countsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0], 10))

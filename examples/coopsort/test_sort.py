@@ -6,12 +6,12 @@ import time
 N = 10000
 
 # Extract all functions from sort module.
-fcns = [val for key, val in sort.__dict__.iteritems() if isfunction(val)]
+fcns = [val for key, val in sort.__dict__.items() if isfunction(val)]
 
 # Time.
 for fcn in fcns:
     #l = [int(N * random.random()) for i in xrange(N)]
-    l = [i for i in xrange(N)]
+    l = [i for i in range(N)]
     #l = [N - i for i in xrange(N)]
     args = ()
     ignoredAlgorithms = ['bubblesort',  'insertionsort',  'selectionsort',
@@ -24,4 +24,4 @@ for fcn in fcns:
     t = time.time()
     fcn(l, *args)
     t = time.time() - t
-    print '%15s  %9.5f' % (fcn.__name__, t)
+    print('%15s  %9.5f' % (fcn.__name__, t))
